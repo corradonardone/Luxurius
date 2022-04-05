@@ -1,5 +1,6 @@
 import discord
 import json
+import os
 from discord import File
 from discord.ext import commands
 from typing import Optional
@@ -24,9 +25,11 @@ class Levelsys(commands.Cog):
 
   @commands.Cog.listener()
   async def on_message(self, message):
+    levels_dir = os.path.join("json", "levels.json")
+    memberdata_dir = os.path.join("json", "memberdata.json")
     if not message.content.startswith("/" or get_prefix):
       if not message.author.bot:
-        with open("json\levels.json", "r") as f:
+        with open(levels_dir, "r") as f:
           data = json.load(f)
         if str(message.guild.id) in data:
           if str(message.author.id) in data[str(message.guild.id)]:
@@ -35,14 +38,14 @@ class Levelsys(commands.Cog):
             increased_xp = xp+15
             new_level = int(increased_xp/100)
             data[str(message.guild.id)][str(message.author.id)]['xp']=increased_xp
-            with open("json\levels.json", "w") as f:
+            with open(levels_dir, "w") as f:
               json.dump(data, f)
             if new_level > lvl:
               embed=discord.Embed(title="Level Up!", description=f"{message.author.mention} just leveled up to level **{new_level}**!!!", color=0x31e30d)
               await message.channel.send(embed=embed)
               data[str(message.guild.id)][str(message.author.id)]['level']=new_level
               data[str(message.guild.id)][str(message.author.id)]['xp']=0
-              with open("json\levels.json", "w") as f:
+              with open(levels_dir, "w") as f:
                 json.dump(data, f)
               for i in range(len(level)):
                 if new_level == level_num[i]:
@@ -60,9 +63,9 @@ class Levelsys(commands.Cog):
           data[str(message.guild.id)][str(message.author.id)] = {}
           data[str(message.guild.id)][str(message.author.id)]['xp'] = 0
           data[str(message.guild.id)][str(message.author.id)]['level'] = 1
-        with open("json\levels.json", "w") as f:
+        with open(levels_dir, "w") as f:
           json.dump(data, f)
-        with open("json\memberdata.json", "r") as f:
+        with open(memberdata_dir, "r") as f:
           user_data = json.load(f)
         if str(message.author.id) in user_data:
           pass
@@ -72,15 +75,17 @@ class Levelsys(commands.Cog):
           user_data[str(message.author.id)]['text_color'] = "#ff9933"
           user_data[str(message.author.id)]['bar_color'] = "#ff9933"
           user_data[str(message.author.id)]['blend'] = 0
-        with open("json\memberdata.json", "w") as f:
+        with open(memberdata_dir, "w") as f:
           json.dump(user_data, f)
 
   @discord.slash_command(name="rank", description="View your rank card")
   async def rank(self, ctx: commands.Context, user: Optional[discord.Member]):
+    levels_dir = os.path.join("json", "levels.json")
+    memberdata_dir = os.path.join("json", "memberdata.json")
     userr = user or ctx.author
-    with open("json\levels.json", "r") as f:
+    with open(levels_dir, "r") as f:
       data = json.load(f)
-    with open("json\memberdata.json", "r") as f:
+    with open(memberdata_dir, "r") as f:
       user_data = json.load(f)
     xp = data[str(ctx.guild.id)][str(userr.id)]["xp"]
     lvl = data[str(ctx.guild.id)][str(userr.id)]["level"]
@@ -126,7 +131,9 @@ class Levelsys(commands.Cog):
 
   @discord.slash_command(name="leaderboard", description="View your server leaderboard")
   async def leaderboard(self, ctx, range_num=5):
-    with open("json\levels.json", "r") as f:
+    levels_dir = os.path.join("json", "levels.json")
+    memberdata_dir = os.path.join("json", "memberdata.json")
+    with open(levels_dir, "r") as f:
       data = json.load(f)
     l = {}
     total_xp = []
@@ -157,34 +164,39 @@ class Levelsys(commands.Cog):
 
   @commands.command("rank_reset")
   async def rank_reset(self, ctx, user: Optional[discord.Member]):
+    levels_dir = os.path.join("json", "levels.json")
+    memberdata_dir = os.path.join("json", "memberdata.json")
     member = user or ctx.author
     if not member == ctx.author:
       role = discord.utils.get(ctx.author.guild.roles, name="Bot-Mod")
       if not role in member.roles:
         await ctx.respond(f"You can only reset your data, to reset other data you must have {role.mention} role")
         return 
-    with open("json\levels.json", "r") as f:
+    with open(levels_dir, "r") as f:
       data = json.load(f)
     del data[str(ctx.guild.id)][str(member.id)]
-    with open("json\levels.json", "w") as f:
+    with open(levels_dir, "w") as f:
       json.dump(data, f)
     await ctx.respond(f"{member.mention}'s Data Got reset")
     
   @discord.slash_command(name="blend", description="Blend your rank card")
   async def blend(self, ctx, member: discord.Member=None):
+    memberdata_dir = os.path.join("json", "memberdata.json")
     if member is None:
       member = ctx.author
-    with open("json\memberdata.json", "r") as f:
+    with open(memberdata_dir, "r") as f:
       user_data = json.load(f)
     if user_data[str(member.id)]['blend'] == 0:
       user_data[str(member.id)]['blend']=1
     else:
       user_data[str(member.id)]['blend']=0
-    with open("json\memberdata.json", "w") as f:
+    with open(memberdata_dir, "w") as f:
       json.dump(user_data, f)
     
   @discord.slash_command(name="card", description="Change your image card")
   async def card(self, ctx, card = None):
+    levels_dir = os.path.join("json", "levels.json")
+    memberdata_dir = os.path.join("json", "memberdata.json")
     member = ctx.author
     if card is None:
       embed = discord.Embed(title="Card Error", description="The card that you select doesn't exist!", color=0xe20808)
@@ -194,12 +206,12 @@ class Levelsys(commands.Cog):
       embed = discord.Embed(title="Card Error", description="The card that you select doesn't exist!", color=0xe20808)
       await ctx.respond(embed=embed)
       return
-    with open("json\memberdata.json", "r") as f:
+    with open(memberdata_dir, "r") as f:
       user_data = json.load(f)
       user_data[str(member.id)]['card']=card
       embed2=discord.Embed(title="Card", description=f"Your new card is: {card}", color=0x12e203)
       await ctx.respond(embed=embed2)
-    with open("json\memberdata.json", "w") as f:
+    with open(memberdata_dir, "w") as f:
       json.dump(user_data, f)
 
 def setup(client):
