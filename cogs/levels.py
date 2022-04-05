@@ -62,7 +62,7 @@ class Levelsys(commands.Cog):
           data[str(message.guild.id)][str(message.author.id)]['level'] = 1
         with open("json\levels.json", "w") as f:
           json.dump(data, f)
-        with open("json\userdata.json", "r") as f:
+        with open("json\memberdata.json", "r") as f:
           user_data = json.load(f)
         if str(message.author.id) in user_data:
           pass
@@ -72,7 +72,7 @@ class Levelsys(commands.Cog):
           user_data[str(message.author.id)]['text_color'] = "#ff9933"
           user_data[str(message.author.id)]['bar_color'] = "#ff9933"
           user_data[str(message.author.id)]['blend'] = 0
-        with open("json\userdata.json", "w") as f:
+        with open("json\memberdata.json", "w") as f:
           json.dump(user_data, f)
 
   @discord.slash_command(name="rank", description="View your rank card")
@@ -80,7 +80,7 @@ class Levelsys(commands.Cog):
     userr = user or ctx.author
     with open("json\levels.json", "r") as f:
       data = json.load(f)
-    with open("json\userdata.json", "r") as f:
+    with open("json\memberdata.json", "r") as f:
       user_data = json.load(f)
     xp = data[str(ctx.guild.id)][str(userr.id)]["xp"]
     lvl = data[str(ctx.guild.id)][str(userr.id)]["level"]
@@ -174,13 +174,13 @@ class Levelsys(commands.Cog):
   async def blend(self, ctx, member: discord.Member=None):
     if member is None:
       member = ctx.author
-    with open("json\userdata.json", "r") as f:
+    with open("json\memberdata.json", "r") as f:
       user_data = json.load(f)
     if user_data[str(member.id)]['blend'] == 0:
       user_data[str(member.id)]['blend']=1
     else:
       user_data[str(member.id)]['blend']=0
-    with open("json\userdata.json", "w") as f:
+    with open("json\memberdata.json", "w") as f:
       json.dump(user_data, f)
     
   @discord.slash_command(name="card", description="Change your image card")
@@ -194,12 +194,12 @@ class Levelsys(commands.Cog):
       embed = discord.Embed(title="Card Error", description="The card that you select doesn't exist!", color=0xe20808)
       await ctx.respond(embed=embed)
       return
-    with open("json\userdata.json", "r") as f:
+    with open("json\memberdata.json", "r") as f:
       user_data = json.load(f)
       user_data[str(member.id)]['card']=card
       embed2=discord.Embed(title="Card", description=f"Your new card is: {card}", color=0x12e203)
       await ctx.respond(embed=embed2)
-    with open("json\userdata.json", "w") as f:
+    with open("json\memberdata.json", "w") as f:
       json.dump(user_data, f)
 
 def setup(client):
