@@ -215,9 +215,8 @@ class Levelsys(commands.Cog):
       json.dump(user_data, f)
   
   @discord.slash_command(name="color", description="Change tour rank card colour")
-  async def color(self, ctx, member: discord.Member=None):
-    if member is None:
-      member = ctx.author
+  async def color(self, ctx, color=None):
+    member = ctx.author
     memberdata_dir = os.path.join("json", "memberdata.json")
     blue = "#1a1aff"
     red = "#e60000"
