@@ -1,4 +1,3 @@
-from asyncio.proactor_events import _ProactorDuplexPipeTransport
 import discord
 import json
 import os
