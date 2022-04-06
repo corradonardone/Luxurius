@@ -227,6 +227,7 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=blue
+        user_data[str(member.id)]['bar_color']=blue
         embed2=discord.Embed(title="Card", description=f"Your new card color is: blue", color=0x12e203)
         await ctx.respond(embed=embed2)
       with open(memberdata_dir, "w") as f:
@@ -236,8 +237,9 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=red
-        embed2=discord.Embed(title="Card", description=f"Your new card color is: red", color=0x12e203)
-        await ctx.respond(embed=embed2)
+        user_data[str(member.id)]['bar_color']=red
+        embed3=discord.Embed(title="Card", description=f"Your new card color is: red", color=0x12e203)
+        await ctx.respond(embed=embed3)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
@@ -245,8 +247,9 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=yellow
-        embed2=discord.Embed(title="Card", description=f"Your new card color is: yellow", color=0x12e203)
-        await ctx.respond(embed=embed2)
+        user_data[str(member.id)]['bar_color']=yellow
+        embed4=discord.Embed(title="Card", description=f"Your new card color is: yellow", color=0x12e203)
+        await ctx.respond(embed=embed4)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
@@ -254,8 +257,9 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=purple
-        embed2=discord.Embed(title="Card", description=f"Your new card color is: purple", color=0x12e203)
-        await ctx.respond(embed=embed2)
+        user_data[str(member.id)]['bar_color']=purple
+        embed5=discord.Embed(title="Card", description=f"Your new card color is: purple", color=0x12e203)
+        await ctx.respond(embed=embed5)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
@@ -263,8 +267,9 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=pink
-        embed2=discord.Embed(title="Card", description=f"Your new card color is: pink", color=0x12e203)
-        await ctx.respond(embed=embed2)
+        user_data[str(member.id)]['bar_color']=pink
+        embed6=discord.Embed(title="Card", description=f"Your new card color is: pink", color=0x12e203)
+        await ctx.respond(embed=embed6)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
