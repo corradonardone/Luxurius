@@ -232,7 +232,6 @@ class Levelsys(commands.Cog):
         await ctx.respond(embed=embed2)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
-        return
     elif red:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -242,7 +241,6 @@ class Levelsys(commands.Cog):
         await ctx.respond(embed=embed3)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
-        return
     elif yellow:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -252,7 +250,6 @@ class Levelsys(commands.Cog):
         await ctx.respond(embed=embed4)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
-        return
     elif purple:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -262,7 +259,6 @@ class Levelsys(commands.Cog):
         await ctx.respond(embed=embed5)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
-        return
     else:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -272,7 +268,6 @@ class Levelsys(commands.Cog):
         await ctx.respond(embed=embed6)
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
-        return
 
 def setup(client):
   client.add_cog(Levelsys(client))
