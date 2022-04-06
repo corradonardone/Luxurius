@@ -99,13 +99,13 @@ class Levelsys(commands.Cog):
     percentage = int(((xp_have * 100)/ xp_need))
     if percentage < 1:
       percentage = 0
-    background = Editor(f"images\{card_num}.png")
+    background = Editor(f"images/{card_num}.png")
     profile = await load_image_async(str(userr.display_avatar))
     profile = Editor(profile).resize((150, 150)).circle_image()
     poppins = Font.poppins(size=40)
     poppins_small = Font.poppins(size=30)
     if blend == 1:
-      ima = Editor("images\zBLACK.png")
+      ima = Editor("images/zBLACK.png")
       background.blend(image=ima, alpha=.5, on_top=False)
     background.paste(profile.image, (30, 30))
     background.rectangle((30, 220), width=650, height=40, fill="#fff", radius=20)
