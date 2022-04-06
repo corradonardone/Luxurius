@@ -1,3 +1,4 @@
+from asyncio.proactor_events import _ProactorDuplexPipeTransport
 import discord
 import json
 import os
@@ -213,6 +214,57 @@ class Levelsys(commands.Cog):
       await ctx.respond(embed=embed2)
     with open(memberdata_dir, "w") as f:
       json.dump(user_data, f)
+  
+  @discord.slash_command(name="color", description="Change tour rank card colour")
+  async def color(self, ctx, member: discord.Member=None):
+    if member is None:
+      member = ctx.author
+    memberdata_dir = os.path.join("json", "memberdata.json")
+    blue = "#1a1aff"
+    red = "#e60000"
+    yellow = "#ffff1a"
+    purple = "#ff1a8c"
+    pink = "#ffb3b3"
+    if blue:
+      with open(memberdata_dir, "r") as f:
+        user_data = json.load(f)
+        user_data[str(member.id)]['text_color']=blue
+        embed2=discord.Embed(title="Card", description=f"Your new card color is: blue", color=0x12e203)
+        await ctx.respond(embed=embed2)
+      with open(memberdata_dir, "w") as f:
+        json.dump(user_data, f)
+    if red:
+      with open(memberdata_dir, "r") as f:
+        user_data = json.load(f)
+        user_data[str(member.id)]['text_color']=red
+        embed2=discord.Embed(title="Card", description=f"Your new card color is: red", color=0x12e203)
+        await ctx.respond(embed=embed2)
+      with open(memberdata_dir, "w") as f:
+        json.dump(user_data, f)
+    if yellow:
+      with open(memberdata_dir, "r") as f:
+        user_data = json.load(f)
+        user_data[str(member.id)]['text_color']=yellow
+        embed2=discord.Embed(title="Card", description=f"Your new card color is: yellow", color=0x12e203)
+        await ctx.respond(embed=embed2)
+      with open(memberdata_dir, "w") as f:
+        json.dump(user_data, f)
+    if purple:
+      with open(memberdata_dir, "r") as f:
+        user_data = json.load(f)
+        user_data[str(member.id)]['text_color']=purple
+        embed2=discord.Embed(title="Card", description=f"Your new card color is: purple", color=0x12e203)
+        await ctx.respond(embed=embed2)
+      with open(memberdata_dir, "w") as f:
+        json.dump(user_data, f)
+    if pink:
+      with open(memberdata_dir, "r") as f:
+        user_data = json.load(f)
+        user_data[str(member.id)]['text_color']=pink
+        embed2=discord.Embed(title="Card", description=f"Your new card color is: pink", color=0x12e203)
+        await ctx.respond(embed=embed2)
+      with open(memberdata_dir, "w") as f:
+        json.dump(user_data, f)
 
 def setup(client):
   client.add_cog(Levelsys(client))
