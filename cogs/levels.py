@@ -223,7 +223,7 @@ class Levelsys(commands.Cog):
     yellow = "#ffff1a"
     purple = "#ff1a8c"
     pink = "#ffb3b3"
-    if blue:
+    if color == blue:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=blue
@@ -232,7 +232,7 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
-    if red:
+    if color == red:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=red
@@ -241,7 +241,7 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
-    if yellow:
+    if color == yellow:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=yellow
@@ -250,7 +250,7 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
-    if purple:
+    if color == purple:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=purple
@@ -259,7 +259,7 @@ class Levelsys(commands.Cog):
       with open(memberdata_dir, "w") as f:
         json.dump(user_data, f)
         return
-    if pink:
+    if color == pink:
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
         user_data[str(member.id)]['text_color']=pink
