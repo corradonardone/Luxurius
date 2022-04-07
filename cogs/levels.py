@@ -219,7 +219,7 @@ class Levelsys(commands.Cog):
     member = ctx.author
     memberdata_dir = os.path.join("json", "memberdata.json")
     if color == "blue":
-      embed = discord.Embed(title="Color ✔", description="Your new rank card color is: Blue", color=0x0033cc)
+      embed = discord.Embed(title="Color <:white_check_mark:>", description="Your new rank card color is: Blue", color=0x0033cc)
       await ctx.respond(embed=embed)
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -229,7 +229,7 @@ class Levelsys(commands.Cog):
         json.dump(user_data, f)
         return
     if color == "orange":
-      embed1 = discord.Embed(title="Color ✔", description="Your new rank card color is: Orange", color=0xff9900)
+      embed1 = discord.Embed(title="Color <:white_check_mark:>", description="Your new rank card color is: Orange", color=0xff9900)
       await ctx.respond(embed=embed1)
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -239,7 +239,7 @@ class Levelsys(commands.Cog):
         json.dump(user_data, f)
         return
     if color == "yellow":
-      embed2 = discord.Embed(title="Color ✔", description="Your new rank card color is: Yellow", color=0xffff1a)
+      embed2 = discord.Embed(title="Color <:white_check_mark:>", description="Your new rank card color is: Yellow", color=0xffff1a)
       await ctx.respond(embed=embed2)
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -249,7 +249,7 @@ class Levelsys(commands.Cog):
         json.dump(user_data, f)
         return
     if color == "red":
-      embed3 = discord.Embed(title="Color ✔", description="Your new rank card color is: Red", color=0xb32d00)
+      embed3 = discord.Embed(title="Color <:white_check_mark:>", description="Your new rank card color is: Red", color=0xb32d00)
       await ctx.respond(embed=embed3)
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
@@ -259,7 +259,7 @@ class Levelsys(commands.Cog):
         json.dump(user_data, f)
         return
     if color == "green":
-      embed4 = discord.Embed(title="Color ✔", description="Your new rank card color is: Green", color=0x66ff33)
+      embed4 = discord.Embed(title="Color <:white_check_mark:>", description="Your new rank card color is: Green", color=0x66ff33)
       await ctx.respond(embed=embed4)
       with open(memberdata_dir, "r") as f:
         user_data = json.load(f)
