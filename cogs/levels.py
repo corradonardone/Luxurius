@@ -179,20 +179,6 @@ class Levelsys(commands.Cog):
       json.dump(data, f)
     await ctx.respond(f"{member.mention}'s Data Got reset")
     
-  @discord.slash_command(name="blend", description="Blend your rank card")
-  async def blend(self, ctx, member: discord.Member=None):
-    memberdata_dir = os.path.join("json", "memberdata.json")
-    if member is None:
-      member = ctx.author
-    with open(memberdata_dir, "r") as f:
-      user_data = json.load(f)
-    if user_data[str(member.id)]['blend'] == 0:
-      user_data[str(member.id)]['blend']=1
-    else:
-      user_data[str(member.id)]['blend']=0
-    with open(memberdata_dir, "w") as f:
-      json.dump(user_data, f)
-    
   @discord.slash_command(name="card", description="Change your image card")
   async def card(self, ctx, card = None):
     levels_dir = os.path.join("json", "levels.json")
