@@ -185,17 +185,17 @@ class Levelsys(commands.Cog):
     memberdata_dir = os.path.join("json", "memberdata.json")
     member = ctx.author
     if card is None:
-      embed = discord.Embed(title="Card Error", description="The card that you select doesn't exist!", color=0xe20808)
+      embed = discord.Embed(title="Card Error ❌", description="The card that you select doesn't exist!", color=0xe20808)
       await ctx.respond(embed=embed)
       return
     if int(card) > 6:
-      embed = discord.Embed(title="Card Error", description="The card that you select doesn't exist!", color=0xe20808)
+      embed = discord.Embed(title="Card Error ❌", description="The card that you select doesn't exist!", color=0xe20808)
       await ctx.respond(embed=embed)
       return
     with open(memberdata_dir, "r") as f:
       user_data = json.load(f)
       user_data[str(member.id)]['card']=card
-      embed2=discord.Embed(title="Card", description=f"Your new card is: {card}", color=0x12e203)
+      embed2=discord.Embed(title="Card :white_check_mark:", description=f"Your new card is: {card}", color=0x12e203)
       await ctx.respond(embed=embed2)
     with open(memberdata_dir, "w") as f:
       json.dump(user_data, f)
@@ -204,6 +204,17 @@ class Levelsys(commands.Cog):
   async def color(self, ctx, color=None):
     member = ctx.author
     memberdata_dir = os.path.join("json", "memberdata.json")
+    colorhelp = """
+    Available colors are:
+    Yellow
+    Blue
+    Orange
+    Red
+    Green
+    """
+    if color == "help":
+      embed6 = discord.Embed(title="Colors", description=colorhelp)
+      await ctx.respond(embed=embed6)
     if color == "blue":
       embed = discord.Embed(title="Color :white_check_mark:", description="Your new rank card color is: Blue", color=0x0033cc)
       await ctx.respond(embed=embed)

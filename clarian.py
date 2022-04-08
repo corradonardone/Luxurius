@@ -55,11 +55,5 @@ async def changeprefix(ctx, prefix):
     await ctx.send(embed=embed1)
     name=f'{prefix}BotBot'
 
-@bot.slash_command(name="help", description="Displays my commands and their function")
-async def help(ctx):
-    embed = discord.Embed(title="Help")
-    await ctx.respond(embed = embed)
-
-
 bot.run(token)
 
