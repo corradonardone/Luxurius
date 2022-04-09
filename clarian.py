@@ -1,7 +1,12 @@
+from ast import Lambda
+from msilib.schema import Component
 import discord
 import os
 import json
 from discord.ext import commands
+from discord.ui import *
+
+from cogs.Information import Information
 
 print("======================")
 print("Il bot si sta avviando...")
@@ -54,6 +59,52 @@ async def changeprefix(ctx, prefix):
     embed1.add_field(name="My new prefix is:", value=f"{prefix}", inline=True)
     await ctx.send(embed=embed1)
     name=f'{prefix}BotBot'
+    
+class DropDownMenu(discord.ui.View):
+    @discord.ui.select(placeholder="Choose a category", min_values=1, max_values=1, options=[
+        discord.SelectOption(label="Information", description="View information commands", emoji="🔍"),
+        discord.SelectOption(label="Moderation", description="View moderation commands", emoji="🤖"),
+        discord.SelectOption(label="Levelling", description="View levelling command", emoji="💹"),
+    ])
+    async def callback(self, select, interaction: discord.Interaction):
+        if select.values[0] == "Information":
+            infoembedmess = """
+```profileinfo```: View the member information
+```serverinfo```: View the server information
+```avatar```: View the avatar of a user
+            """
+            infoembed = discord.Embed(
+                title="Information",
+                description="Information commands list:",
+                color=0x21f312
+            )
+            infoembed.add_field(name=infoembedmess, value="\u200b")
+            await interaction.response.send_message(embed=infoembed, ephemeral=True)
+        if select.values[0] == "Moderation":
+            await interaction.response.send_message("Coming soon...", ephemeral=True)
+        if select.values[0] == "Levelling":
+            levellingembedmess = """
+```rank```: View user rank
+```leaderboard```: View the server leaderboard
+```card```: Select your card background (use number from 1 to 6)
+```color```: Select your rank card text color
+            """
+            levellingembed = discord.Embed(
+                title="Levelling",
+                description="Levelling commands list:",
+                color=0x21f312
+            )
+            levellingembed.add_field(name=levellingembedmess, value="\u200b")
+            await interaction.response.send_message(embed=levellingembed, ephemeral=True)
+
+@bot.command(name="help")
+async def help(ctx):
+    embed = discord.Embed(
+        title="Choose an option!",
+        colour=0x21f312
+    )
+    dropdowns=DropDownMenu()
+    await ctx.send(embed=embed, view=dropdowns)
 
 bot.run(token)
 

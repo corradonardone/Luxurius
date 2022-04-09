@@ -23,7 +23,7 @@ class Information(commands.Cog):
         self.bot = bot
 
     @discord.slash_command(name="profile", description="View you profile card")
-    async def profile(self,ctx,member:discord.Member=None):
+    async def profileinfo(self,ctx,member:discord.Member=None):
         if not member:
             member = ctx.author
         name, nick, Id, status = str(member), member.display_name, str(member.id), str(member.status).upper()
@@ -61,7 +61,7 @@ class Information(commands.Cog):
             await ctx.respond(file= discord.File(a, "profile.png"))
 
     @discord.slash_command(name="server", description="View server card information")
-    async def server(self,ctx):
+    async def serverinfo(self,ctx):
         name, Id, nick, membercount = ctx.guild.name, str(ctx.guild.id), "Server", str(ctx.guild.member_count)
         toprole = "Owner"
         owner = str(ctx.guild.owner)
