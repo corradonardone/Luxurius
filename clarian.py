@@ -1,5 +1,3 @@
-from ast import Lambda
-from msilib.schema import Component
 import discord
 import os
 import json
