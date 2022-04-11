@@ -269,7 +269,7 @@ class Levelsys(commands.Cog):
       embed5 = discord.Embed(title="Color ❌", description="The color you chose doesn't exist. To see the list of available colors use the help command.", color=0xb32d00)
       await ctx.respond(embed=embed5)
   
-  @commands.command(name="blend", description="Toggle the blend into the rank card")
+  @discord.slash_command(name="blend", description="Toggle the blend into the rank card")
   async def blend(self, ctx):
     member = ctx.author
     memberdata_dir = os.path.join("json", "memberdata.json")
