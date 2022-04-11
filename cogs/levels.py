@@ -268,6 +268,27 @@ class Levelsys(commands.Cog):
     else:
       embed5 = discord.Embed(title="Color ❌", description="The color you chose doesn't exist. To see the list of available colors use the help command.", color=0xb32d00)
       await ctx.respond(embed=embed5)
+  
+  @commands.command(name="blend", description="Toggle the blend into the rank card")
+  async def blend(self, ctx):
+    member = ctx.author
+    memberdata_dir = os.path.join("json", "memberdata.json")
+    with open(memberdata_dir, "r") as f:
+      user_data = json.load(f)
+      if user_data[str(member.id)]['blend']==0:
+        embed0 = discord.Embed(title="Blend", description="The blend are now enabled")
+        user_data[str(member.id)]['blend']=1
+        with open(memberdata_dir, "w") as f:
+          json.dump(user_data, f)
+          await ctx.send(embed=embed0)
+          return
+      if user_data[str(member.id)]['blend']==1:
+        embed1 = discord.Embed(title="Blend", description="The blend are now disactivated")
+        user_data[str(member.id)]['blend']=0
+        with open(memberdata_dir, "w") as f:
+          json.dump(user_data,f)
+          await ctx.send(embed=embed1)
+
 
 def setup(client):
   client.add_cog(Levelsys(client))
