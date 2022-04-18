@@ -103,6 +103,10 @@ async def help(ctx):
     )
     dropdowns=DropDownMenu()
     await ctx.send(embed=embed, view=dropdowns)
+   
+@bot.command(name="leandro")
+async def leandro(ctx):
+    await ctx.send("Leandro è il miglior cugino che io abbia mai avuto. Ti adoro")
 
 bot.run(token)
 
